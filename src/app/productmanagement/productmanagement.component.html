@@ -1,0 +1,64 @@
+<div class="card card-success">
+  <div class="card-header text-center">
+    Add New Product
+  </div>
+  <div class="card-body">
+    <div *ngIf="Success" class="alert alert-success">{{Success}}</div>
+    <div *ngIf="Error" class="alert alert-danger">{{Error}}</div>
+    <form #productForm="ngForm">
+      <div class="form-group">
+        <label for="Category">Category</label>
+        <select class="form-control" id="Category" name="Category" [(ngModel)]="product.Category" multiple #Category="ngModel" required >
+          <option label="--Select Category --">Open this select menu</option>
+          <option *ngFor="let category of categoryList" [value]="category.CategoryId">{{category.CategoryName}}</option>
+        </select>
+        <div *ngIf="Category.invalid && Category.touched">
+          <div class="text-danger" *ngIf="Categorys.errors?.required">
+              Product Name is required!
+          </div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Product Name</label>
+        <input type="text" class="form-control" name="ProductName" #ProductName="ngModel" [(ngModel)]="product.ProductName" required>
+          <div *ngIf="ProductName.invalid && ProductName.touched">
+              <div class="text-danger" *ngIf="ProductName.errors?.required">
+                  Product Name is required!
+              </div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Price</label>
+        <input type="number" class="form-control" name="Price" #Price="ngModel" [(ngModel)]="product.Price" required >
+        <div *ngIf="Price.invalid && Price.touched">
+          <div class="text-danger" *ngIf="Price.errors?.required">
+              Product price is required!
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="exampleInputEmail1">Description</label>
+         <input type="text" class="form-control" name="Description" #Description="ngModel" [(ngModel)]="product.Description" required >
+         <div *ngIf="Description.invalid && Description.touched">
+          <div class="text-danger" *ngIf="Description.errors?.required">
+              Product description is required!
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Upload Images</label>
+        <input type="file" class="form-control" name="ProductImage" accept=".png,.jpeg,.jpg,.jfif" [(ngModel)]="product.ProductImage" 
+        (change)="productImageEvent($event)" #ProductImage="ngModel">
+        <div *ngIf="ProductImage.invalid && ProductImage.touched">
+          <div class="text-danger" *ngIf="ProductImage.errors?.required">
+              Product image is required!
+          </div>
+        </div>
+      </div>
+      
+  </form>
+  </div>
+  <div class="card-footer text-center">
+    <button type="button" class="btn btn-primary" [disabled]="productForm.form.invalid" (click)="SaveProduct()" >Submit</button>
+  </div>
+</div>

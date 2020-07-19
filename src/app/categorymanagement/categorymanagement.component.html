@@ -1,0 +1,22 @@
+<form #categoryForm="ngForm">
+  <div *ngIf="Success" class="alert alert-success">{{Success}}</div>
+    <div *ngIf="Error" class="alert alert-danger">{{Error}}</div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Parent Category</label>
+      <select class="form-control" name="ParentCategory" [(ngModel)]="category.ParentCategory" #ParentCategory="ngModel" > 
+        <option>Select Parent Category</option>
+        <option *ngFor="let item of categoryList" [value]="item.CategoryId" >{{item.CategoryName}}</option>
+      </select>
+      <div class="danger-text" *ngIf="" ></div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Category</label>
+      <input type="text" class="form-control" name="CategoryName" #CategoryName="ngModel" [(ngModel)]="category.CategoryName" required>
+        <div *ngIf="CategoryName.invalid && CategoryName.touched">
+            <div class="text-danger" *ngIf="CategoryName.errors?.required">
+                Category Name is required!
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" [disabled]="categoryForm.form.invalid" (click)="SaveCategory()" >Submit</button>
+  </form>
