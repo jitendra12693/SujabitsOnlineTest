@@ -5,6 +5,8 @@ import { CategorymanagementComponent } from './categorymanagement/categorymanage
 import { ProductmanagementComponent } from './productmanagement/productmanagement.component';
 import { CategoryComponent } from './category/category.component';
 import { CartComponent } from './cart/cart.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 const routes: Routes = [
@@ -12,6 +14,8 @@ const routes: Routes = [
   {path:'category',component:CategoryComponent},
   {path:'productmngmnt',component:ProductmanagementComponent},
   {path:'categorymngmt',component:CategorymanagementComponent},
+  {path:'product-list',component:ProductListComponent},
+  {path:'product-details',component:ProductDetailsComponent},
   {path:'cart',component:CartComponent},
   { path: '', redirectTo: '/product', pathMatch: 'full' },
   { path: '**', redirectTo: '/product', pathMatch: 'full' }

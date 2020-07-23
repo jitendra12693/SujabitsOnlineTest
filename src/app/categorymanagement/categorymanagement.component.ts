@@ -29,7 +29,7 @@ export class CategorymanagementComponent implements OnInit {
   SaveCategory(){
     this.categoryService.saveCategory(this.category).subscribe(result => {
       this.Success="New category added successfully!!!"
-      this.category={ParentCategory:0,CategoryName:'',CategoryId:0}
+      //this.category={ParentCategory:0,CategoryName:'',CategoryId:0}
     },
     error => {
       this.Error="This category already added in inventory";

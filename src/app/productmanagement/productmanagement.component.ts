@@ -10,21 +10,24 @@ import { CategoryService } from '../services/category.service';
   templateUrl: './productmanagement.component.html',
   styleUrls: ['./productmanagement.component.css']
 })
-export class ProductmanagementComponent implements OnInit {
+export class ProductmanagementComponent implements OnInit,OnDestroy {
   product={Category:[],ProductName:'',Description:'',ProductImage:'',Price:0.00,CategoryIds:''}
   private router: Router;
   sub: Subscription;
   categoryList: any;
   Success:string;
   Error:string;
-
+  
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
   constructor(private productService: ProductService
     ,         private categoryService:CategoryService
     ,         private route: ActivatedRoute
-    ,         private http: HttpClient) { }
+    ) { }
 
   ngOnInit() {
-    this.categoryService.geAllCategory({}).subscribe((category: any) => {
+    this.sub = this.categoryService.geAllCategory({}).subscribe((category: any) => {
       if (category) {
         this.categoryList = category;
       } else {
@@ -35,10 +38,11 @@ export class ProductmanagementComponent implements OnInit {
     });
   }
   SaveProduct(){
+    this.sub = this.route.params.subscribe(params => {});
     this.product.CategoryIds = this.product.Category.join(',');
     this.productService.saveProduct(this.product).subscribe(result => {
       this.Success="New product added successfully!!!"
-      this.product={Category:[],ProductName:'',Description:'',ProductImage:'',Price:0.00,CategoryIds:''}
+      this.gotoList();
     },
     error => {
       this.Error="This product already added in inventory";
@@ -47,7 +51,7 @@ export class ProductmanagementComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/product']);
+    this.router.navigate(['/product-list']);
   } 
 
   productImageEvent(fileEvent: any){
@@ -58,4 +62,13 @@ export class ProductmanagementComponent implements OnInit {
       this.product.ProductImage = reader.result as string;
     };
   }
+
+  isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
 }

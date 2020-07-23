@@ -24,6 +24,11 @@ export class ProductService {
   GetAllProductList(searchProduct: any): Observable<any> {
     return this.http.post<any>(this.PRODUCT_API + 'GetAllProductList/', searchProduct);
   }
+
+  removeproduct(productDetails: any): Observable<any> {
+    return this.http.post<any>(this.PRODUCT_API + 'RemoveProduct/', productDetails);
+  }
+  
   SearchProductByCategory(searchProduct: any): Observable<any> {
     return this.http.post<any>(this.PRODUCT_API + 'SearchProductByCategory/', searchProduct);
     //this.updateProduct.next(result);

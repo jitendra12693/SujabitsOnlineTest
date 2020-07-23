@@ -10,6 +10,8 @@ import { ProductmanagementComponent } from './productmanagement/productmanagemen
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { CartComponent } from './cart/cart.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CartComponent } from './cart/cart.component';
     CategoryComponent,
     CategorymanagementComponent,
     ProductmanagementComponent,
-    CartComponent
+    CartComponent,
+    ProductListComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
